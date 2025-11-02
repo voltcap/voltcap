@@ -1,40 +1,27 @@
-# generate_stats.py
 import requests
-import datetime
-import os
 
-USERNAME = "voltcap"  # change if needed
-OUTPUT_FILE = "github_stats.svg"
+USERNAME = "voltcap"
+user_data = requests.get(f"https://api.github.com/users/{USERNAME}").json()
+repos = requests.get(f"https://api.github.com/users/{USERNAME}/repos").json()
 
-# Fetch user data from GitHub API
-url = f"https://api.github.com/users/{USERNAME}"
-response = requests.get(url)
-data = response.json()
+total_stars = sum(r["stargazers_count"] for r in repos)
+public_repos = len(repos)
 
-# Basic check
-if "message" in data and data["message"] == "Not Found":
-    raise ValueError(f"User '{USERNAME}' not found on GitHub!")
+svg = f"""<svg width="480" height="200" xmlns="http://www.w3.org/2000/svg">
+  <rect width="100%" height="100%" fill="#0D0D0D" />
+  <text x="24" y="40" font-size="22" font-family="monospace" fill="#00FFB3">voltcap</text>
+  <text x="24" y="70" font-size="14" font-family="monospace" fill="#CCCCCC">
+    ⭐ Stars: {total_stars}
+  </text>
+  <text x="24" y="95" font-size="14" font-family="monospace" fill="#CCCCCC">
+    📦 Public Repos: {public_repos}
+  </text>
+  <text x="24" y="120" font-size="14" font-family="monospace" fill="#CCCCCC">
+    👥 Followers: {followers}
+  </text>
+  <rect x="20" y="150" width="440" height="2" fill="#00FFB3" />
+  <text x="24" y="175" font-size="10" fill="#888">Last updated automatically</text>
+</svg>"""
 
-# Extract stats
-name = data.get("name", USERNAME)
-public_repos = data.get("public_repos", 0)
-followers = data.get("followers", 0)
-following = data.get("following", 0)
-updated = datetime.datetime.utcnow().strftime("%Y-%m-%d %H:%M:%S UTC")
-
-# Create SVG content
-svg = f"""
-<svg width="480" height="180" xmlns="http://www.w3.org/2000/svg">
-  <rect width="100%" height="100%" fill="#0d1117"/>
-  <text x="50%" y="30" text-anchor="middle" fill="#58a6ff" font-size="20" font-family="monospace">{name}</text>
-  <text x="50%" y="70" text-anchor="middle" fill="#c9d1d9" font-size="16" font-family="monospace">📦 Public Repos: {public_repos}</text>
-  <text x="50%" y="100" text-anchor="middle" fill="#c9d1d9" font-size="16" font-family="monospace">👥 Followers: {followers} | Following: {following}</text>
-  <text x="50%" y="140" text-anchor="middle" fill="#6e7681" font-size="12" font-family="monospace">Updated: {updated}</text>
-</svg>
-"""
-
-# Save SVG file
-with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
+with open("github_stats.svg", "w") as f:
     f.write(svg)
-
-print(f"✅ Generated {OUTPUT_FILE} for {USERNAME}")
