@@ -12,3 +12,4 @@
 </p>
 
 
+![GitHub Stats](https://raw.githubusercontent.com/voltcap/voltcap/main/github_stats.svg)
