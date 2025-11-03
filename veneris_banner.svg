@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="300"
+viewBox="0 0 800 300" style="background-color:#0a0a0a; font-family:monospace;">
+
+<!-- Digital Compass -->
+<g transform="translate(40,77) scale(7)">
+  <circle cx="11" cy="11" r="6" stroke="#00ffb3" fill="none" stroke-width="1"/>
+  <polygon points="11,5 12,11 11,17 10,11" fill="#00ffb3">
+    <animateTransform attributeName="transform" type="rotate"
+      values="0 11 11; 360 11 11" dur="6s" repeatCount="indefinite"/>
+  </polygon>
+</g>
+
+
+
+
+  <!-- Typing animation -->
+  <text x="220" y="100" font-size="22" fill="#00ffb3">
+    <tspan>VOLT'S TERMINAL</tspan>
+    <animate attributeName="display" values="inline;none" dur="0.1s" begin="0s"/>
+  </text>
+
+  <text x="220" y="100" font-size="22" fill="#00ffb3">
+    <tspan>VOLT'S TERMINAL_</tspan>
+  </text>
+
+  <text x="220" y="135" font-size="18" fill="#00ffb3">
+    <tspan>Digital Archaeology_</tspan>
+    <animate attributeName="opacity" values="0;1" dur="0.3s" begin="2s" fill="freeze"/>
+  </text>
+
+  <text x="220" y="165" font-size="18" fill="#00ffb3">
+    <tspan>Ancient Near East_</tspan>
+    <animate attributeName="opacity" values="0;1" dur="0.3s" begin="3s" fill="freeze"/>
+  </text>
+
+  <text x="220" y="195" font-size="18" fill="#00ffb3">
+    <tspan>Cultural Heritage Preservation_</tspan>
+    <animate attributeName="opacity" values="0;1" dur="0.3s" begin="4s" fill="freeze"/>
+  </text>
+
+  <text x="220" y="225" font-size="18" fill="#00ffb3">
+    <tspan>History_</tspan>
+    <animate attributeName="opacity" values="0;1" dur="0.3s" begin="5s" fill="freeze"/>
+  </text>
+
+  <!-- DINGIR symbol (𒀭) fixed position on right side -->
+  <text x="650" y="186" font-size="95" fill="#00ffb3" text-anchor="middle" opacity="0.85">
+    𒀭
+    <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+  </text>
+
+</svg>
